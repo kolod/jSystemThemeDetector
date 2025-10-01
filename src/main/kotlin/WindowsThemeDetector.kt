@@ -21,7 +21,7 @@ import com.sun.jna.platform.win32.Win32Exception
 import com.sun.jna.platform.win32.WinNT
 import com.sun.jna.platform.win32.WinReg
 import com.sun.jna.platform.win32.W32Errors
-import org.slf4j.LoggerFactory
+import org.apache.logging.log4j.LogManager
 import java.util.*
 
 /**
@@ -33,7 +33,7 @@ import java.util.*
  */
 class WindowsThemeDetector : OsThemeDetector() {
     companion object {
-        private val logger = LoggerFactory.getLogger(WindowsThemeDetector::class.java)
+                private val logger = LogManager.getLogger(WindowsThemeDetector::class.java)
         private const val REGISTRY_PATH = "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"
         private const val REGISTRY_VALUE = "AppsUseLightTheme"
     }
@@ -114,4 +114,3 @@ class WindowsThemeDetector : OsThemeDetector() {
         }
     }
 }
-

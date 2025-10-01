@@ -29,7 +29,7 @@
 package io.github.kolod.jthemedetecor
 
 import io.github.kolod.jthemedetecor.util.ConcurrentHashSet
-import org.slf4j.LoggerFactory
+import org.apache.logging.log4j.LogManager
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -45,7 +45,7 @@ import java.util.regex.Pattern
  */
 class KdeThemeDetector : OsThemeDetector() {
     companion object {
-        private val logger = LoggerFactory.getLogger(KdeThemeDetector::class.java)
+                private val logger = LogManager.getLogger(KdeThemeDetector::class.java)
         private const val GET_THEME_CMD = "kreadconfig5 --file kdeglobals --group General --key ColorScheme"
     }
 
@@ -119,8 +119,7 @@ class KdeThemeDetector : OsThemeDetector() {
             }
         }
         companion object {
-            private val logger = LoggerFactory.getLogger(DetectorThread::class.java)
+                        private val logger = LogManager.getLogger(DetectorThread::class.java)
         }
     }
 }
-

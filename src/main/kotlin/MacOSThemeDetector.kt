@@ -32,7 +32,7 @@ import io.github.kolod.jthemedetecor.util.ConcurrentHashSet
 import com.sun.jna.Callback
 import de.jangassen.jfa.foundation.Foundation
 import de.jangassen.jfa.foundation.ID
-import org.slf4j.LoggerFactory
+import org.apache.logging.log4j.LogManager
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.regex.Pattern
@@ -44,7 +44,7 @@ import java.util.regex.Pattern
  */
 class MacOSThemeDetector : OsThemeDetector() {
     companion object {
-        private val logger = LoggerFactory.getLogger(MacOSThemeDetector::class.java)
+                private val logger = LogManager.getLogger(MacOSThemeDetector::class.java)
     }
 
     private val listeners = ConcurrentHashSet<(Boolean) -> Unit>()
@@ -131,4 +131,3 @@ class MacOSThemeDetector : OsThemeDetector() {
         }
     }
 }
-

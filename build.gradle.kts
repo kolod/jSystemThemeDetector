@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "io.github.kolod"
-version = "3.8"
+version = "4.0"
 
 repositories {
     mavenCentral()
@@ -25,17 +25,15 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.slf4j:slf4j-api:1.7.32")
 
+    // Logging
     implementation("org.apache.logging.log4j:log4j-core:2.25.2")
     implementation("org.apache.logging.log4j:log4j-api:2.25.2")
-
-    testImplementation("ch.qos.logback:logback-classic:1.5.13")
-    testImplementation("ch.qos.logback:logback-core:1.5.13")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.25.2")
 
     // JNA
-    implementation("net.java.dev.jna:jna:5.15.0")
-    implementation("net.java.dev.jna:jna-platform:5.15.0")
+    implementation("net.java.dev.jna:jna:5.18.0")
+    implementation("net.java.dev.jna:jna-platform:5.18.0")
 
     // JFA
     implementation("de.jangassen:jfa:1.2.0") {
@@ -43,21 +41,33 @@ dependencies {
     }
 
     // OSHI
-    implementation("com.github.oshi:oshi-core:5.8.6")
+    implementation("com.github.oshi:oshi-core:6.9.0")
 
-    implementation("io.github.g00fy2:versioncompare:1.4.1")
+    // Version compare
+    implementation("io.github.g00fy2:versioncompare:1.5.0")
 
-    implementation("org.jetbrains:annotations:22.0.0")
+    // Annotations
+    implementation("org.jetbrains:annotations:26.0.2-1")
+
+    // Test
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
 }
 
-tasks.named<JavaCompile>("compileJava") {
-    // placing dependencies to the module path
-    // https://discuss.gradle.org/t/gradle-doesnt-add-modules-to-module-path-during-compile/27382
-    inputs.property("moduleName", "com.jthemedetector")
-    doFirst {
-        options.compilerArgs = listOf(
-            "--module-path", classpath.asPath
-        )
-        classpath = files()
-    }
+tasks.test {
+    useJUnitPlatform()
+}
+
+tasks.register<JavaExec>("runGuiDemo") {
+    group = "application"
+    description = "Runs the GuiDemo class"
+    classpath = sourceSets["test"].runtimeClasspath
+    mainClass.set("GuiDemo") // Use the fully qualified class name if in a package
+}
+
+tasks.register<JavaExec>("runConsoleDemo") {
+    group = "application"
+    description = "Runs the ConsoleDemo class"
+    classpath = sourceSets["test"].runtimeClasspath
+    mainClass.set("OsThemeDetectorDemoKt") // Use the fully qualified class name if in a package
 }

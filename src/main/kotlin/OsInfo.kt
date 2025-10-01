@@ -15,7 +15,7 @@
 package io.github.kolod.jthemedetecor.util
 
 import io.github.kolod.jthemedetecor.OsThemeDetector
-import org.slf4j.LoggerFactory
+import org.apache.logging.log4j.LogManager
 import oshi.PlatformEnum
 import oshi.SystemInfo
 import io.github.g00fy2.versioncompare.Version
@@ -24,7 +24,7 @@ import java.io.IOException
 import java.io.InputStreamReader
 
 object OsInfo {
-    private val logger = LoggerFactory.getLogger(OsThemeDetector::class.java)
+        private val logger = LogManager.getLogger(OsThemeDetector::class.java)
 
     private val platformType: PlatformEnum
     private val family: String
@@ -75,4 +75,3 @@ object OsInfo {
         }
     }
 }
-

@@ -15,7 +15,7 @@
 package io.github.kolod.jthemedetecor
 
 import io.github.kolod.jthemedetecor.util.ConcurrentHashSet
-import org.slf4j.LoggerFactory
+import org.apache.logging.log4j.LogManager
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -30,7 +30,7 @@ import java.util.regex.Pattern
  */
 class GnomeThemeDetector : OsThemeDetector() {
     companion object {
-        private val logger = LoggerFactory.getLogger(GnomeThemeDetector::class.java)
+                private val logger = LogManager.getLogger(GnomeThemeDetector::class.java)
         private const val MONITORING_CMD = "gsettings monitor org.gnome.desktop.interface"
         private val GET_CMD = arrayOf(
             "gsettings get org.gnome.desktop.interface gtk-theme",
@@ -135,8 +135,7 @@ class GnomeThemeDetector : OsThemeDetector() {
             }
         }
         companion object {
-            private val logger = LoggerFactory.getLogger(DetectorThread::class.java)
+            private val logger = LogManager.getLogger(DetectorThread::class.java)
         }
     }
 }
-

@@ -15,7 +15,7 @@
 package io.github.kolod.jthemedetecor
 
 import io.github.kolod.jthemedetecor.util.OsInfo
-import org.slf4j.LoggerFactory
+import org.apache.logging.log4j.LogManager
 import oshi.annotation.concurrent.ThreadSafe
 
 /**
@@ -25,7 +25,7 @@ import oshi.annotation.concurrent.ThreadSafe
  */
 abstract class OsThemeDetector {
     companion object {
-        private val logger = LoggerFactory.getLogger(OsThemeDetector::class.java)
+                private val logger = LogManager.getLogger(OsThemeDetector::class.java)
         @Volatile
         private var osThemeDetector: OsThemeDetector? = null
 
@@ -99,4 +99,3 @@ abstract class OsThemeDetector {
         override fun removeListener(darkThemeListener: ((Boolean) -> Unit)?) {}
     }
 }
-
